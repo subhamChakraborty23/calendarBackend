@@ -18,10 +18,14 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.set("trust proxy",1)
+
 app.use(
   cookieSession({
     maxAge: 3*24 * 60 * 60 * 1000,
     keys: [process.env.COOKIE_KEY],
+    sameSite:"none",
+    secure:true
   })
 );
 
