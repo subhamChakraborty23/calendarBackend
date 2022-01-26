@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const cors = require("cors")
 
 const { getAllUsers, getUserById } = require("../controllers/userController");
 const { isLoggedIn } = require("../middlewares/user");
@@ -8,7 +9,12 @@ const { isLoggedIn } = require("../middlewares/user");
 router.get("/users", getAllUsers);
 router.get("/users/:id", getUserById);
 
-router.get("/user", async (req, res) => {
+router.get("/user",
+cors({ 
+  origin: process.env.CLIENT_URL, 
+  credentials: true 
+})
+, async (req, res) => {
   try {
     if (req.user) {
         // console.log(req.user)

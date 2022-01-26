@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+const cors = require("cors")
 
 const CLIENT_URL = process.env.CLIENT_URL;
 
@@ -23,7 +24,12 @@ router.get("/login/failed", (req, res) => {
   });
 });
 
-router.get("/logout", async(req, res) => {
+router.get("/logout",
+cors({ 
+  origin: process.env.CLIENT_URL, 
+  credentials: true 
+}),
+ async(req, res) => {
   await req.logout()
   req.session = null
   req.sessionOptions.maxAge = 0

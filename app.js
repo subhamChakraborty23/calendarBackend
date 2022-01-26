@@ -14,7 +14,11 @@ const app = express();
 //middleware
 app.use(morgan("tiny"));
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(cors({ 
+  origin:'*'
+  // origin: process.env.CLIENT_URL, 
+  // credentials: true 
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
